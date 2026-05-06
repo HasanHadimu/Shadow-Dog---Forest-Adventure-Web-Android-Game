@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Shadow Dog - Forest Adventure | Android Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-wrapper">
+        <canvas id="gameCanvas"></canvas>
+        <div class="touch-controls" id="touchControls">
+            <div class="d-pad">
+                <button class="touch-btn" data-action="up">▲</button>
+                <div class="d-pad-row">
+                    <button class="touch-btn" data-action="left">◀</button>
+                    <button class="touch-btn" data-action="down">▼</button>
+                    <button class="touch-btn" data-action="right">▶</button>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="touch-btn action" data-action="roll">🎲 ROLL</button>
+                <button class="touch-btn action" data-action="bite">🦷 BITE</button>
+                <button class="touch-btn action" data-action="dizzy">🌀 DIZZY</button>
+            </div>
+        </div>
+        <div class="info-panel">
+            <div class="animation-name" id="animName">run</div>
+            <div class="frame-info" id="frameInfo">Frame: 1/9</div>
+        </div>
+    </div>
+    <div id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <p>Loading Shadow Dog...</p>
+        <small>Forest Adventure Game</small>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

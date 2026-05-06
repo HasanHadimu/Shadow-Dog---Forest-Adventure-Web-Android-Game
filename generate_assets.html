@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Forest Game Assets - Download PNG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a472a 0%, #0a1a0a 100%);
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #FFD700;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .assets-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .asset-card {
+            background: rgba(0,0,0,0.7);
+            border-radius: 20px;
+            padding: 20px;
+            border: 2px solid #FFD700;
+            text-align: center;
+        }
+        
+        .asset-card h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .canvas-preview {
+            background: #333;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: transparent;
+        }
+        
+        .asset-info {
+            color: white;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        
+        .download-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .download-btn:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+        
+        .download-all {
+            text-align: center;
+            margin: 30px auto;
+        }
+        
+        .download-all-btn {
+            background: #FFD700;
+            color: #1a472a;
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .download-all-btn:hover {
+            transform: scale(1.05);
+            background: #FFC700;
+        }
+        
+        .note {
+            background: rgba(0,0,0,0.7);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 30px;
+            color: white;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .note code {
+            background: #333;
+            padding: 2px 8px;
+            border-radius: 5px;
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 Forest Game Assets Generator 🎮</h1>
+    
+    <div class="assets-container">
+        <!-- Asset 1: Langit & Awan -->
+        <div class="asset-card">
+            <h3>🌤️ bg_sky.png</h3>
+            <div class="canvas-preview">
+                <canvas id="skyCanvas" width="800" height="600"></canvas>
+            </div>
+            <div class="asset-info">📐 Resolusi: 800x600px | 💾 Format: PNG</div>
+            <button class="download-btn" onclick="downloadAsset('sky')">⬇️ Download bg_sky.png</button>
+        </div>
+
+        <!-- Asset 2: Gunung -->
+        <div class="asset-card">
+            <h3>⛰️ bg_mountains.png</h3>
+            <div class="canvas-preview">
+                <canvas id="mountainsCanvas" width="1600" height="600"></canvas>
+            </div>
+            <div class="asset-info">📐 Resolusi: 1600x600px | 💾 Format: PNG</div>
+            <button class="download-btn" onclick="downloadAsset('mountains')">⬇️ Download bg_mountains.png</button>
+        </div>
+
+        <!-- Asset 3: Pohon -->
+        <div class="asset-card">
+            <h3>🌲 bg_trees.png</h3>
+            <div class="canvas-preview">
+                <canvas id="treesCanvas" width="1600" height="600"></canvas>
+            </div>
+            <div class="asset-info">📐 Resolusi: 1600x600px | 💾 Format: PNG</div>
+            <button class="download-btn" onclick="downloadAsset('trees')">⬇️ Download bg_trees.png</button>
+        </div>
+
+        <!-- Asset 4: Tanah -->
+        <div class="asset-card">
+            <h3>🌿 bg_ground.png</h3>
+            <div class="canvas-preview">
+                <canvas id="groundCanvas" width="1600" height="600"></canvas>
+            </div>
+            <div class="asset-info">📐 Resolusi: 1600x600px | 💾 Format: PNG</div>
+            <button class="download-btn" onclick="downloadAsset('ground')">⬇️ Download bg_ground.png</button>
+        </div>
+    </div>
+
+    <div class="download-all">
+        <button class="download-all-btn" onclick="downloadAll()">⬇️📦 DOWNLOAD SEMUA ASSET</button>
+    </div>
+
+    <div class="note">
+        <p>💡 <strong>Cara Penggunaan:</strong></p>
+        <p>1. Klik tombol <strong>Download</strong> pada setiap asset yang ingin disimpan</p>
+        <p>2. Simpan file dengan nama yang sesuai (<code>bg_sky.png</code>, <code>bg_mountains.png</code>, <code>bg_trees.png</code>, <code>bg_ground.png</code>)</p>
+        <p>3. Letakkan file di folder yang sama dengan file game Anda</p>
+        <p>4. Refresh game Anda, background akan muncul!</p>
+    </div>
+
+    <script>
+        // ============ GENERATE SKY & CLOUDS ============
+        function generateSky() {
+            const canvas = document.getElementById('skyCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Langit gradasi
+            const gradient = ctx.createLinearGradient(0, 0, 0, 600);
+            gradient.addColorStop(0, '#4A90E2');
+            gradient.addColorStop(0.4, '#87CEEB');
+            gradient.addColorStop(0.7, '#B8E4D0');
+            gradient.addColorStop(1, '#E8F5E9');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 800, 600);
+            
+            // Matahari
+            ctx.fillStyle = '#FFD700';
+            ctx.beginPath();
+            ctx.arc(680, 80, 50, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Sinar matahari
+            ctx.strokeStyle = '#FFD700';
+            ctx.lineWidth = 3;
+            for(let i = 0; i < 16; i++) {
+                const angle = i * Math.PI * 2 / 16;
+                const x1 = 680 + Math.cos(angle) * 60;
+                const y1 = 80 + Math.sin(angle) * 60;
+                const x2 = 680 + Math.cos(angle) * 85;
+                const y2 = 80 + Math.sin(angle) * 85;
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            }
+            
+            // Awan 1
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.beginPath();
+            ctx.ellipse(120, 100, 65, 45, 0, 0, Math.PI * 2);
+            ctx.ellipse(180, 85, 55, 40, 0, 0, Math.PI * 2);
+            ctx.ellipse(70, 90, 50, 40, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Awan 2
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.beginPath();
+            ctx.ellipse(450, 120, 60, 40, 0, 0, Math.PI * 2);
+            ctx.ellipse(510, 105, 50, 35, 0, 0, Math.PI * 2);
+            ctx.ellipse(400, 110, 45, 35, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Awan 3
+            ctx.beginPath();
+            ctx.ellipse(620, 60, 45, 30, 0, 0, Math.PI * 2);
+            ctx.ellipse(670, 55, 40, 28, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Burung
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            for(let i = 0; i < 5; i++) {
+                const x = 200 + i * 100;
+                const y = 50 + (i % 2) * 20;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.quadraticCurveTo(x + 15, y - 10, x + 30, y);
+                ctx.moveTo(x + 30, y);
+                ctx.quadraticCurveTo(x + 45, y - 10, x + 60, y);
+                ctx.stroke();
+            }
+        }
+        
+        // ============ GENERATE MOUNTAINS ============
+        function generateMountains() {
+            const canvas = document.getElementById('mountainsCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Background transparan
+            ctx.clearRect(0, 0, 1600, 600);
+            
+            // Gunung background (jauh)
+            ctx.fillStyle = '#4A6741';
+            ctx.beginPath();
+            ctx.moveTo(0, 400);
+            ctx.lineTo(200, 250);
+            ctx.lineTo(400, 350);
+            ctx.lineTo(600, 200);
+            ctx.lineTo(800, 320);
+            ctx.lineTo(1000, 180);
+            ctx.lineTo(1200, 300);
+            ctx.lineTo(1400, 220);
+            ctx.lineTo(1600, 350);
+            ctx.lineTo(1600, 600);
+            ctx.lineTo(0, 600);
+            ctx.fill();
+            
+            // Gunung depan (lebih gelap)
+            ctx.fillStyle = '#3A5A32';
+            ctx.beginPath();
+            ctx.moveTo(0, 450);
+            ctx.lineTo(150, 320);
+            ctx.lineTo(300, 400);
+            ctx.lineTo(500, 280);
+            ctx.lineTo(700, 380);
+            ctx.lineTo(900, 250);
+            ctx.lineTo(1100, 360);
+            ctx.lineTo(1300, 290);
+            ctx.lineTo(1500, 380);
+            ctx.lineTo(1600, 350);
+            ctx.lineTo(1600, 600);
+            ctx.lineTo(0, 600);
+            ctx.fill();
+            
+            // Salju di puncak
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            
+            // Puncak gunung 1
+            ctx.beginPath();
+            ctx.moveTo(585, 205);
+            ctx.lineTo(600, 200);
+            ctx.lineTo(615, 205);
+            ctx.fill();
+            
+            // Puncak gunung 2
+            ctx.beginPath();
+            ctx.moveTo(985, 185);
+            ctx.lineTo(1000, 180);
+            ctx.lineTo(1015, 185);
+            ctx.fill();
+            
+            // Puncak gunung 3
+            ctx.beginPath();
+            ctx.moveTo(1385, 225);
+            ctx.lineTo(1400, 220);
+            ctx.lineTo(1415, 225);
+            ctx.fill();
+            
+            // Kabut di gunung
+            ctx.fillStyle = 'rgba(200, 220, 200, 0.3)';
+            ctx.fillRect(0, 350, 1600, 100);
+        }
+        
+        // ============ GENERATE TREES ============
+        function generateTrees() {
+            const canvas = document.getElementById('treesCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            ctx.clearRect(0, 0, 1600, 600);
+            
+            // Fungsi gambar pohon
+            function drawTree(x, size, type) {
+                const treeHeight = 200 * size;
+                const treeWidth = 30 * size;
+                const yBase = 600;
+                
+                if (type === 'pine') {
+                    // Pohon cemara
+                    ctx.fillStyle = '#8B5A2B';
+                    ctx.fillRect(x, yBase - treeHeight, treeWidth, treeHeight);
+                    
+                    for(let i = 0; i < 4; i++) {
+                        const yOffset = i * 45;
+                        const widthScale = 1 - (i * 0.15);
+                        ctx.fillStyle = `#${['2D5A27', '3A6A32', '4A7A42', '5A8A52'][i]}`;
+                        ctx.beginPath();
+                        ctx.moveTo(x + treeWidth/2, yBase - treeHeight - 20 - yOffset);
+                        ctx.lineTo(x - 20 * size * widthScale, yBase - treeHeight + 30 - yOffset);
+                        ctx.lineTo(x + treeWidth + 20 * size * widthScale, yBase - treeHeight + 30 - yOffset);
+                        ctx.fill();
+                    }
+                } else {
+                    // Pohon rindang
+                    ctx.fillStyle = '#8B5A2B';
+                    ctx.fillRect(x, yBase - treeHeight, treeWidth, treeHeight);
+                    
+                    ctx.fillStyle = '#2D5A27';
+                    ctx.beginPath();
+                    ctx.ellipse(x + treeWidth/2, yBase - treeHeight - 30, 35 * size, 50 * size, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.fillStyle = '#3A7A32';
+                    ctx.beginPath();
+                    ctx.ellipse(x + treeWidth/2, yBase - treeHeight - 70, 30 * size, 45 * size, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.fillStyle = '#4A8A42';
+                    ctx.beginPath();
+                    ctx.ellipse(x + treeWidth/2, yBase - treeHeight - 105, 25 * size, 40 * size, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            // Pohon jauh (background)
+            const farTrees = [100, 250, 400, 550, 700, 850, 1000, 1150, 1300, 1450];
+            farTrees.forEach(x => {
+                drawTree(x, 0.7, 'pine');
+            });
+            
+            // Pohon dekat (foreground) - lebih besar
+            const nearTrees = [50, 200, 350, 500, 650, 800, 950, 1100, 1250, 1400, 1550];
+            nearTrees.forEach(x => {
+                if (x % 300 === 50) {
+                    drawTree(x, 1.2, 'oak');
+                } else {
+                    drawTree(x, 1.0, 'pine');
+                }
+            });
+            
+            // Semak-semak
+            ctx.fillStyle = '#4A7A42';
+            for(let i = 0; i < 30; i++) {
+                const x = i * 55;
+                ctx.beginPath();
+                ctx.ellipse(x, 560, 30, 20, 0, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        // ============ GENERATE GROUND ============
+        function generateGround() {
+            const canvas = document.getElementById('groundCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            ctx.clearRect(0, 0, 1600, 600);
+            
+            // Tanah utama
+            const gradient = ctx.createLinearGradient(0, 500, 0, 600);
+            gradient.addColorStop(0, '#5A3A2A');
+            gradient.addColorStop(1, '#4A2A1A');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 500, 1600, 100);
+            
+            // Texture tanah
+            ctx.fillStyle = '#6B4C3A';
+            for(let i = 0; i < 200; i++) {
+                const x = i * 8 + (i % 20) * 3;
+                ctx.fillRect(x, 515 + (i % 15), 4, 2);
+            }
+            
+            // Rumput
+            ctx.fillStyle = '#6A9A4A';
+            for(let i = 0; i < 160; i++) {
+                const x = i * 10;
+                ctx.beginPath();
+                ctx.moveTo(x, 500);
+                ctx.lineTo(x - 4, 485);
+                ctx.lineTo(x + 4, 485);
+                ctx.fill();
+            }
+            
+            // Rumput tinggi
+            ctx.fillStyle = '#5A8A3A';
+            for(let i = 0; i < 80; i++) {
+                const x = i * 20 + 5;
+                ctx.beginPath();
+                ctx.moveTo(x, 500);
+                ctx.lineTo(x - 3, 475);
+                ctx.lineTo(x + 3, 475);
+                ctx.fill();
+            }
+            
+            // Bunga-bunga
+            for(let i = 0; i < 60; i++) {
+                const x = i * 27;
+                const colors = ['#FF6B6B', '#FFD93D', '#FF85B3', '#85D6FF'];
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.beginPath();
+                ctx.arc(x, 495, 4, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#FFE66D';
+                ctx.beginPath();
+                ctx.arc(x, 495, 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            // Batu-batu kecil
+            ctx.fillStyle = '#8B7D6B';
+            for(let i = 0; i < 100; i++) {
+                const x = i * 16;
+                ctx.fillRect(x, 530 + (i % 20), 6, 4);
+            }
+            
+            // Daun jatuh
+            for(let i = 0; i < 50; i++) {
+                const x = i * 32;
+                ctx.fillStyle = `rgba(139, 69, 19, ${0.5 + Math.random() * 0.5})`;
+                ctx.beginPath();
+                ctx.ellipse(x, 550 + (i % 30), 5, 3, Math.PI / 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            // Jamur
+            for(let i = 0; i < 20; i++) {
+                const x = i * 80 + 20;
+                ctx.fillStyle = '#E8D8C0';
+                ctx.fillRect(x, 545, 6, 10);
+                ctx.fillStyle = '#FF4444';
+                ctx.beginPath();
+                ctx.ellipse(x + 3, 543, 8, 6, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#FFFFFF';
+                for(let j = 0; j < 3; j++) {
+                    ctx.beginPath();
+                    ctx.arc(x + 1 + j * 2, 541, 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
+        
+        // ============ DOWNLOAD FUNCTION ============
+        function downloadAsset(asset) {
+            let canvas, filename;
+            
+            switch(asset) {
+                case 'sky':
+                    canvas = document.getElementById('skyCanvas');
+                    filename = 'bg_sky.png';
+                    break;
+                case 'mountains':
+                    canvas = document.getElementById('mountainsCanvas');
+                    filename = 'bg_mountains.png';
+                    break;
+                case 'trees':
+                    canvas = document.getElementById('treesCanvas');
+                    filename = 'bg_trees.png';
+                    break;
+                case 'ground':
+                    canvas = document.getElementById('groundCanvas');
+                    filename = 'bg_ground.png';
+                    break;
+            }
+            
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            
+            // Animasi feedback
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ Downloaded!';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+            }, 2000);
+        }
+        
+        // ============ DOWNLOAD ALL ============
+        function downloadAll() {
+            const assets = ['sky', 'mountains', 'trees', 'ground'];
+            assets.forEach((asset, index) => {
+                setTimeout(() => {
+                    downloadAsset(asset);
+                }, index * 500);
+            });
+        }
+        
+        // Generate semua asset saat halaman dimuat
+        generateSky();
+        generateMountains();
+        generateTrees();
+        generateGround();
+        
+        console.log('✅ Asset siap didownload!');
+    </script>
+</body>
+</html>
